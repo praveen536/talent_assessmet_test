@@ -1,0 +1,98 @@
+<div class="card  text-bg-dark">
+    <div class="card-header text-center">
+        Total question : {{quizList.quiz.questions.length}}
+        <!-- | currentQid={{quizList.currentQueId}} -->
+    </div>
+    <div class="card-body text-left">
+        <wizard on-finish="quizList.submitForm1(qdata)" on-cancel="cancelledWizard()" indicators-position="bottom"
+            name="customOrderWizard">
+            <form ng-submit="quizList.submitForm(qdata)">
+                <wz-step ng-repeat="q in quizList.quiz.questions" canexit="exitValidation" step
+                    wz-title="Que {{$index+1}}" wz-order="{{$index+1}}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="card-title">Question {{quizList.step}}</h5>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <p class="card-text" ng-class="quizList.countdown==0 ? 'text-danger':''"><i
+                                    class="fa-solid fa-stopwatch-20"></i>
+                                {{quizList.countdown}} Sec Remaining</p>
+                        </div>
+                    </div>
+                    <label for="checkbox">{{$index+1}}. {{q.name}}</label>
+                    <input type="hidden" value="{{quizList.currentQueId}}" data-qid="{{q.id}}"
+                        ng-init="quizList.disQue[q.id]=false">
+                    <input type="hidden" ng-model="quizList.que[q.id]" id="qid{{$index+1}}" name="qdata.que[]"
+                        value="{{q.id}}">
+                    <!-- <ul> -->
+                    <div ng-repeat="o in q.options">
+                        <div class="form-check">
+                            <label class="form-check-label" for="ans{{q.id}}{{o.id}}" ng-class="o.submited_ans==o.id && quizList.finalsubmit ? (o.isAnswer ? 'ans-success':'ans-danger') : o.submited_ans!=o.id && quizList.finalsubmit ? (o.isAnswer ? 'ans-success':'ans-danger')">{{o.name}}</label>
+                            <input class="form-check-input" type="radio" id="ans{{q.id}}{{o.id}}"
+                                ng-init="quizList.ans[q.id]=false" ng-click="quizList.ans[q.id]=true"
+                                ng-model="o.submited_ans" name="qdata.ans{{q.id}}" value="{{o.id}}"
+                                ng-disabled="quizList.disQue[q.id]">
+                            <span ng-if="o.submited_ans==o.id && quizList.finalsubmit">
+                                <span ng-class="o.isAnswer ? 'ans-success':'ans-danger'">
+                                    <i class="fa-solid fa-check" ng-if="o.isAnswer"></i>
+                                    <i class="fa-solid fa-xmark" ng-if="!o.isAnswer"></i>
+                                </span>
+                            </span>
+                            <span ng-if="o.submited_ans!=o.id && quizList.finalsubmit"><span
+                                    ng-class="o.isAnswer ? 'ans-success':'ans-danger'">{{o.isAnswer ? 'Correct
+                                    ans':''}}</span></span>
+                        </div>
+                    </div>
+                    <!-- </ul> -->
+                    <span class="color-red"
+                        ng-if="quizList.ans[q.id]==false && quizList.showQzTimeReqEror || ">{{quizList.showQzTimeReqErorMsg}}</span><br>
+                    <!-- <hr> -->
+                    <input type="button" class="btn btn-primary" ng-if="quizList.step!=1 && quizList.finalsubmit"
+                        wz-previous="quizList.wizardClick('back')" value="Back" />
+                    <input type="button" class="btn btn-primary" ng-init="quizList.step=1"
+                        wz-next="quizList.wizardClick('next',q,qdata)" value="Next"
+                        ng-disabled="quizList.ans[q.id]==false && quizList.disQue[q.id]==false"
+                        ng-hide="quizList.step==quizList.quiz.questions.length" />
+                    <!-- for final submit button -->
+                    <input type="submit" class="btn btn-primary" ng-click="quizList.wizardClick('final',qdata)" wz-next
+                        value="Submit" ng-if="quizList.step==quizList.quiz.questions.length && !quizList.finalsubmit" />
+                </wz-step>
+            </form>
+        </wizard>
+    </div>
+    <!-- <div class="card-footer text-muted">
+        2 days ago
+    </div> -->
+</div>
+
+
+
+
+
+<!-- {{quizList.quiz.questions | json}} -->
+
+<!-- <form ng-submit="quizList.submitForm(qdata)"> -->
+<!-- <div ng-if="quizList.finalsubmit">
+    <br>
+    <h1>Report</h1>
+    <li ng-repeat="q in quizList.quiz.questions">
+        <label for="checkbox">{{$index+1}} {{q.name}}</label>
+        <input type="hidden" ng-model="qdata.que" name="qdata.que[]" value="q.id">
+        <ul>
+            <li ng-repeat="o in q.options">
+                {{o.name}}
+                <input type="radio" name="qdata.ans{{q.id}}[]" disabled
+                    ng-attr-checked="{{o.isAnswer==true ? 'true':''}}" value="{{q.id}}">
+                <span ng-if="o.submited_ans==o.id && quizList.finalsubmit"><span
+                        ng-class="o.isAnswer ? 'ans-success':'ans-danger'">{{o.isAnswer ? 'U selected right ans':'You
+                        selected wrong ans'}}</span></span>
+                <span ng-if="o.submited_ans!=o.id && quizList.finalsubmit"><span
+                        ng-class="o.isAnswer ? 'ans-success':'ans-danger'">{{o.isAnswer ? 'Correct
+                        ans':''}}</span></span>
+            </li>
+        </ul>
+    </li>
+</div> -->
+<!-- <button type="submit">Submit</button> -->
+<!--  </form>
+    {{qdata | json}} -->

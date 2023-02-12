@@ -1,0 +1,15 @@
+.color-red,.ans-danger {
+    color: red;
+}
+.ans-success {
+    color: green;
+}
+body{
+    background-color: rgb(83, 82, 82);
+}
+/* .fz-12{
+    font-size: 12px;
+} */
+.steps-indicator {
+    font-size: 10px;
+}

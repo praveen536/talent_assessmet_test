@@ -1,0 +1,79 @@
+{
+    "id": 1,
+    "name": " कंप्यूटर के आविष्कारक कौन हैं ?",
+    "description": "कंप्यूटर से संबन्धित सामान्य ज्ञान | कंप्यूटर जीके क्वेश्चन | कंप्यूटर जीके",
+    "questions": [
+        {
+            "id": 1010,
+            "name": "कंप्यूटर के आविष्कारक कौन हैं ?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "वॉन न्यूमेन",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "जे एस किल्बी",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "चार्ल्स बैबेज",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "इनमें से कोई नहीं",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        }, {
+            "id": 1011,
+            "name": "सबसे पहला कंप्यूटर का नाम क्या था ?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1065,
+                    "questionId": 1011,
+                    "name": "ATARIS",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1066,
+                    "questionId": 1011,
+                    "name": "ENIAC",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1067,
+                    "questionId": 1011,
+                    "name": "TANDY",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1068,
+                    "questionId": 1011,
+                    "name": "NOVELLA",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        }
+      
+    ]
+}
