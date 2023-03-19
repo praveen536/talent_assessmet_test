@@ -13,3 +13,10 @@ body{
 .steps-indicator {
     font-size: 10px;
 }
+.next_pre_btn_div{
+    display: flex;
+    flex-direction: row-reverse;
+    align-content: flex-end;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+}

@@ -1,9 +1,10 @@
 myapp.controller("myCon", quizController);
-function quizController($http, $scope, $q, $timeout, WizardHandler) {
+function quizController($http, $scope, $q, $timeout, WizardHandler,$filter) {
     var quizList = this;
     quizList.title = "QuizApp";
     quizList.showQzTimeReqEror = false;
     quizList.finalsubmit=false;
+    quizList.totalAtemp=[];
     // getting quiz list from json
     $http.get('question.json').then(function (res) {
         console.log(res);
@@ -23,13 +24,13 @@ function quizController($http, $scope, $q, $timeout, WizardHandler) {
             // return false;
         }
         // console.log('go to '+type);
-        console.log('data=');
-        console.log(data);
-        console.log('data.id=');
+        // console.log('data=');
+        // console.log(data);
+        // console.log('data.id=');
         // alert(WizardHandler.wizard().currentStepNumber());
-        console.log(data.id);
-        console.log(quizList.ans);
-        console.log(quizList.ans[data.id]);
+        // console.log(data.id);
+        // console.log(quizList.ans);
+        // console.log(quizList.ans[data.id]);
         if (type == "next") {
             quizList.step += 1;
             if (!quizList.finalsubmit) {
@@ -38,17 +39,17 @@ function quizController($http, $scope, $q, $timeout, WizardHandler) {
         }else if (type == "back") {
             quizList.step -= 1;
         }else if (type == "final") {
-            console.log(data);
+            // console.log(data);
             quizList.submitForm(data);
         }
         // console.log(angular.element('#qid'+quizList.step).val());
         // // console.log(cqid);
-        console.log('current step=' + quizList.step);
+        // console.log('current step=' + quizList.step);
         var cqid = quizList.quiz.questions[quizList.step - 1].id
         quizList.currentQueId = cqid;
     }
 
-    quizList.countdown = 20;
+    quizList.countdown = 6; //defalult timer 20 second
     quizList.qzTimer = function () {
         if (quizList.countdown > 0) {
             quizList.countdown--;
@@ -56,28 +57,46 @@ function quizController($http, $scope, $q, $timeout, WizardHandler) {
             myTimeout = $timeout(quizList.qzTimer, 1000);
         } else if (quizList.countdown == 0) {
             // diasble question base on timer
-            console.log(quizList.currentQueId);
+            // console.log(quizList.currentQueId);
             $timeout.cancel(myTimeout);
             quizList.disQue[quizList.currentQueId] = true;
             quizList.showQzTimeReqErorMsg = "Timeout click on next button";
             quizList.showQzTimeReqEror = true;
         }
     }
+    // quiz timer start on controller load
     var myTimeout = $timeout(quizList.qzTimer, 1000);
 
+    // for reset countdown
     quizList.resetCountdown = function () {
-        quizList.countdown = 20;
+        quizList.countdown = 6;
         $timeout.cancel(myTimeout);
     }
     const digits = (num, count = 0) => { if (num) { return digits(Math.floor(num / 10), ++count); }; return count; };
 
     // quiz form submit
     quizList.submitForm = function (qdata) {
-        // alert('final submit');
-        console.log('submit the quiz');
-        console.log(qdata);
         quizList.finalsubmit=true;
         quizList.resetCountdown();quizList.countdown = 00;
         angular.element(".card-body").find(".form-check-input").attr("disabled", "disabled");
+        // count total que atempt
+        quizList.totalAtemp= quizList.quiz.questions;
+        quizList.totalAtemp2=0;
+        quizList.totalAtemp2=quizList.totalAtemp.filter(function(i){
+            // console.log(i.submited_option);
+            if (i.submited_option!=undefined) {
+                return quizList.totalAtemp2=quizList.totalAtemp2+1;
+            }
+        });
+        // count total correct answered question
+        quizList.totalCorrAns2=0;
+        quizList.quiz.questions.forEach(i => {
+            if (i.submited_option) {
+                i.options.forEach(j => {
+                    if (j.isAnswer && i.submited_option==j.id) {quizList.totalCorrAns2=quizList.totalCorrAns2+1;}
+                });
+            }
+        })
+        
     }
 }
