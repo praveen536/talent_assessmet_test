@@ -41,9 +41,11 @@
                                     {{quizList.countdown}}</span>
                                 <span ng-if="quizList.finalsubmit">
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                                    Que Attempt : {{quizList.totalAtemp2.length}}/{{quizList.quiz.questions.length}}
+                                    {{quizList.totalAtemp2.length}}/{{quizList.quiz.questions.length}} Que Attempt
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                                    Correct Ans : {{quizList.totalCorrAns2}}
+                                    {{quizList.totalCorrAns2}} Correct Ans
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    {{quizList.totalWrongAns2}} Wrong Ans
                                 </span>
                             </div>
                             <div class="col-md-6 text-right next_pre_btn_div">

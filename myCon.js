@@ -90,10 +90,12 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter) {
         });
         // count total correct answered question
         quizList.totalCorrAns2=0;
+        quizList.totalWrongAns2=0;
         quizList.quiz.questions.forEach(i => {
             if (i.submited_option) {
                 i.options.forEach(j => {
                     if (j.isAnswer && i.submited_option==j.id) {quizList.totalCorrAns2=quizList.totalCorrAns2+1;}
+                    if (j.isAnswer && i.submited_option!=j.id) {quizList.totalWrongAns2=quizList.totalWrongAns2+1;}
                 });
             }
         })
