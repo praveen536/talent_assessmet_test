@@ -98,7 +98,27 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter) {
                     if (j.isAnswer && i.submited_option!=j.id) {quizList.totalWrongAns2=quizList.totalWrongAns2+1;}
                 });
             }
-        })
-        
+        });
+        $scope.score=(quizList.totalCorrAns2/quizList.quiz.questions.length)*100;
+        showchart($scope.score);
     }
+    
+    // chart
+    function showchart(score) {
+        // pie chart
+        quizList.pieData = {
+            series: [score, 100 - score]
+        };
+
+        // donut chart
+        quizList.donutOptions = {
+            donut: true,
+            donutWidth: 60,
+            donutSolid: true,
+            startAngle: 270,
+            total: 200,
+            showLabel: false
+        };
+    }
+     
 }

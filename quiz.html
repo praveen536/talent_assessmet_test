@@ -77,28 +77,4 @@
     </div>
 </div>
 
-<!-- <form ng-submit="quizList.submitForm(qdata)"> -->
-<!-- <div ng-if="quizList.finalsubmit">
-    <br>
-    <h1>Report</h1>
-    <li ng-repeat="q in quizList.quiz.questions">
-        <label for="checkbox">{{$index+1}} {{q.name}}</label>
-        <input type="hidden" ng-model="qdata.que" name="qdata.que[]" value="q.id">
-        <ul>
-            <li ng-repeat="o in q.options">
-                {{o.name}}
-                <input type="radio" name="qdata.ans{{q.id}}[]" disabled
-                    ng-attr-checked="{{o.isAnswer==true ? 'true':''}}" value="{{q.id}}">
-                <span ng-if="o.submited_ans==o.id && quizList.finalsubmit"><span
-                        ng-class="o.isAnswer ? 'ans-success':'ans-danger'">{{o.isAnswer ? 'U selected right ans':'You
-                        selected wrong ans'}}</span></span>
-                <span ng-if="o.submited_ans!=o.id && quizList.finalsubmit"><span
-                        ng-class="o.isAnswer ? 'ans-success':'ans-danger'">{{o.isAnswer ? 'Correct
-                        ans':''}}</span></span>
-            </li>
-        </ul>
-    </li>
-</div> -->
-<!-- <button type="submit">Submit</button> -->
-<!--  </form>
-    {{qdata | json}} -->
+<chartist ng-if="quizList.finalsubmit" class="ct-chart ct-golden-section" chartist-data="quizList.pieData" chartist-chart-type="Pie" chartist-chart-options="quizList.donutOptions"></chartist>
