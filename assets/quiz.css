@@ -20,3 +20,8 @@ body{
     flex-wrap: nowrap;
     align-items: flex-end;
 }
+#score_outof {
+    position: absolute;
+    margin-top: -210px;
+    margin-right: -90px;
+}

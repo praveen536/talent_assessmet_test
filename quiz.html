@@ -1,5 +1,46 @@
 <div class="container">
-    <div class="card  text-bg-dark">
+    <div class="card text-bg-dark text-center" ng-if="quizList.finalsubmit">
+        <div class="card-header">
+            Assessment Attempt 
+            <button onClick="window.location.reload();" class="btn btn-primary" style="vertical-align: revert;">Retake quiz</button>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Attempt 1</h5>
+            <div class="card-text row">
+                <div class="col-md-4">Date</div>
+                <div class="col-md-4">Best Score</div>
+                <div class="col-md-4">Total Time</div>
+            </div>
+            <hr>
+            <div class="col-md-12 row">
+                <div class="col-md-6">
+                    <chartist class="ct-chart ct-golden-section" chartist-data="quizList.pieData" chartist-chart-type="Pie"
+                        chartist-chart-options="quizList.donutOptions"></chartist>
+                    <span id="score_outof">{{quizList.totalCorrAns2}}/{{quizList.quiz.questions.length}}</span>
+                </div>
+                <div class="col-md-6 text-left" style="text-align: left;">
+                    <ul class="list-group">
+                        <li class="list-group-item align-items-left">
+                            <i class="fa-solid fa-check" style="color: #1dfc37;"></i> Correct Answers
+                            <span class="badge bg-primary rounded-pill">{{quizList.totalCorrAns2}} </span>
+                        </li>
+                        <li class="list-group-item align-items-left">
+                            <i class="fa-solid fa-xmark" style="color: #fb132a;"></i> Wrong Answers
+                            <span class="badge bg-primary rounded-pill">{{quizList.totalWrongAns2}}</span>
+                        </li>
+                        <li class="list-group-item align-items-left">
+                            <i class="fa-solid fa-do-not-enter" style="color: #f6fa00;"></i> Unanswered
+                            <span class="badge bg-primary rounded-pill">{{quizList.totalNotAns2}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer text-body-secondary">
+                2 days ago
+            </div>
+        </div>
+    </div>
+    <div class="card  text-bg-dark"  ng-if="!quizList.finalsubmit">
         <div class="card-header text-center">Assessment Test</div>
         <div class="card-body text-left">
             <wizard on-finish="quizList.submitForm1(qdata)" on-cancel="cancelledWizard()" indicators-position="bottom"
@@ -70,11 +111,5 @@
                 </form>
             </wizard>
         </div>
-        <!-- <div class="card-footer text-muted">
-        2 days ago
-    </div> -->
-
     </div>
 </div>
-
-<chartist ng-if="quizList.finalsubmit" class="ct-chart ct-golden-section" chartist-data="quizList.pieData" chartist-chart-type="Pie" chartist-chart-options="quizList.donutOptions"></chartist>

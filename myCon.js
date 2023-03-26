@@ -1,10 +1,14 @@
 myapp.controller("myCon", quizController);
-function quizController($http, $scope, $q, $timeout, WizardHandler,$filter) {
+function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $state,$stateParams) {
+    console.log('calling');
     var quizList = this;
     quizList.title = "QuizApp";
     quizList.showQzTimeReqEror = false;
     quizList.finalsubmit=false;
+    quizList.showQzTimeReqErorMsg='';
     quizList.totalAtemp=[];
+    quizList.countdown = 6; //defalult timer 20 second
+
     // getting quiz list from json
     $http.get('question.json').then(function (res) {
         console.log(res);
@@ -49,7 +53,6 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter) {
         quizList.currentQueId = cqid;
     }
 
-    quizList.countdown = 6; //defalult timer 20 second
     quizList.qzTimer = function () {
         if (quizList.countdown > 0) {
             quizList.countdown--;
@@ -91,12 +94,15 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter) {
         // count total correct answered question
         quizList.totalCorrAns2=0;
         quizList.totalWrongAns2=0;
+        quizList.totalNotAns2=0;
         quizList.quiz.questions.forEach(i => {
             if (i.submited_option) {
                 i.options.forEach(j => {
                     if (j.isAnswer && i.submited_option==j.id) {quizList.totalCorrAns2=quizList.totalCorrAns2+1;}
                     if (j.isAnswer && i.submited_option!=j.id) {quizList.totalWrongAns2=quizList.totalWrongAns2+1;}
                 });
+            }else{
+                quizList.totalNotAns2=quizList.totalNotAns2+1;
             }
         });
         $scope.score=(quizList.totalCorrAns2/quizList.quiz.questions.length)*100;
