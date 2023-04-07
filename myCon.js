@@ -1,14 +1,19 @@
 myapp.controller("myCon", quizController);
-function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $state,$stateParams) {
+function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $state,$stateParams,$location,$anchorScroll) {
     console.log('calling');
     var quizList = this;
     quizList.title = "QuizApp";
     quizList.showQzTimeReqEror = false;
     quizList.finalsubmit=false;
+    quizList.isReview=false;
     quizList.showQzTimeReqErorMsg='';
     quizList.totalAtemp=[];
     quizList.countdown = 6; //defalult timer 20 second
 
+    // review quiz
+    quizList.review=function(){
+        quizList.isReview=quizList.isReview ? false:true;
+    }
     // getting quiz list from json
     $http.get('question.json').then(function (res) {
         console.log(res);
@@ -80,6 +85,7 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
     // quiz form submit
     quizList.submitForm = function (qdata) {
         quizList.finalsubmit=true;
+        quizList.isReview=true;
         quizList.resetCountdown();quizList.countdown = 00;
         angular.element(".card-body").find(".form-check-input").attr("disabled", "disabled");
         // count total que atempt
@@ -126,5 +132,8 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
             showLabel: false
         };
     }
+    // scroll to top in angularjs
+    $location.hash('scroecard');
+    $anchorScroll();
      
 }

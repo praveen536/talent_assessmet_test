@@ -1,8 +1,9 @@
 <div class="container">
-    <div class="card text-bg-dark text-center" ng-if="quizList.finalsubmit">
+    <div class="card text-bg-dark text-center" ng-if="quizList.finalsubmit" id="scroecard">
         <div class="card-header">
             Assessment Attempt 
             <button onClick="window.location.reload();" class="btn btn-primary" style="vertical-align: revert;">Retake quiz</button>
+            <button ng-click="quizList.review()" class="btn btn-primary" style="vertical-align: revert;">Review quiz</button>
         </div>
         <div class="card-body">
             <h5 class="card-title">Attempt 1</h5>
@@ -40,11 +41,12 @@
             </div>
         </div>
     </div>
-    <div class="card  text-bg-dark"  ng-if="!quizList.finalsubmit">
-        <div class="card-header text-center">Assessment Test</div>
+    <div class="card  text-bg-dark" ng-hide="quizList.isReview">
+        <div class="card-header text-center">Assessment Test - {{quizList.quiz.name}}</div>
+        <div class="text-center">{{quizList.quiz.description}}</div>
         <div class="card-body text-left">
             <wizard on-finish="quizList.submitForm1(qdata)" on-cancel="cancelledWizard()" indicators-position="bottom"
-                name="customOrderWizard">
+                name="customOrderWizard" edit-mode="finalsubmit">
                 <form ng-submit="quizList.submitForm(qdata)">
                     <wz-step ng-repeat="q in quizList.quiz.questions" canexit="exitValidation" step
                         wz-title="Que {{$index+1}}" wz-order="{{$index+1}}">
