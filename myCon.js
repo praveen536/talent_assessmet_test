@@ -9,7 +9,7 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
     quizList.isReview=false;
     quizList.showQzTimeReqErorMsg='';
     quizList.totalAtemp=[];
-    quizList.countdown = 6; //defalult timer 20 second
+    quizList.countdown = 20; //defalult timer 20 second
 
     // review quiz
     quizList.review=function(){
@@ -87,7 +87,7 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
     quizList.submitForm = function (qdata) {
         quizList.finalsubmit=true;
         quizList.isReview=true;
-        quizList.resetCountdown();quizList.countdown = 00;
+        quizList.resetCountdown();quizList.countdown = 0;
         angular.element(".card-body").find(".form-check-input").attr("disabled", "disabled");
         // count total que atempt
         quizList.totalAtemp= quizList.quiz.questions;
