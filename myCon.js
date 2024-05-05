@@ -15,7 +15,7 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
         quizList.isReview=quizList.isReview ? false:true;
     }
     // getting quiz list from json
-    $http.get('question.json').then(function (res) {
+    $http.get('talent_assessmet_test/question.json').then(function (res) {
         console.log(res);
         quizList.quiz = res.data;
         // for (let i = 0; i < res.data.questions.length; i++) {
