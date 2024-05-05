@@ -1,6 +1,5 @@
 myapp.controller("myCon", quizController);
 function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $state,$stateParams,$location,$anchorScroll) {
-    console.log('calling');
     var quizList = this;
     quizList.baseUrl='/'; 
     quizList.title = "QuizApp";
@@ -17,12 +16,7 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
     }
     // getting quiz list from json
     $http.get(quizList.baseUrl+'question.json').then(function (res) {
-        console.log(res);
         quizList.quiz = res.data;
-        // for (let i = 0; i < res.data.questions.length; i++) {
-        //     console.log(res.data.questions[i].id);
-        //     quizList.disQue[res.data.questions[i].id] = false;
-        // }
         quizList.currentQueId = res.data.questions[0].id;
     });
 
@@ -33,14 +27,6 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
             quizList.showQzTimeReqErorMsg = "Please select one option";
             // return false;
         }
-        // console.log('go to '+type);
-        // console.log('data=');
-        // console.log(data);
-        // console.log('data.id=');
-        // alert(WizardHandler.wizard().currentStepNumber());
-        // console.log(data.id);
-        // console.log(quizList.ans);
-        // console.log(quizList.ans[data.id]);
         if (type == "next") {
             quizList.step += 1;
             if (!quizList.finalsubmit) {
@@ -49,12 +35,8 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
         }else if (type == "back") {
             quizList.step -= 1;
         }else if (type == "final") {
-            // console.log(data);
             quizList.submitForm(data);
         }
-        // console.log(angular.element('#qid'+quizList.step).val());
-        // // console.log(cqid);
-        // console.log('current step=' + quizList.step);
         var cqid = quizList.quiz.questions[quizList.step - 1].id
         quizList.currentQueId = cqid;
     }
@@ -66,7 +48,6 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
             myTimeout = $timeout(quizList.qzTimer, 1000);
         } else if (quizList.countdown == 0) {
             // diasble question base on timer
-            // console.log(quizList.currentQueId);
             $timeout.cancel(myTimeout);
             quizList.disQue[quizList.currentQueId] = true;
             quizList.showQzTimeReqErorMsg = "Timeout click on next button";
@@ -93,7 +74,6 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
         quizList.totalAtemp= quizList.quiz.questions;
         quizList.totalAtemp2=0;
         quizList.totalAtemp2=quizList.totalAtemp.filter(function(i){
-            // console.log(i.submited_option);
             if (i.submited_option!=undefined) {
                 return quizList.totalAtemp2=quizList.totalAtemp2+1;
             }
