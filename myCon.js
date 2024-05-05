@@ -78,7 +78,7 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
 
     // for reset countdown
     quizList.resetCountdown = function () {
-        quizList.countdown = 6;
+        quizList.countdown = 20;
         $timeout.cancel(myTimeout);
     }
     const digits = (num, count = 0) => { if (num) { return digits(Math.floor(num / 10), ++count); }; return count; };
