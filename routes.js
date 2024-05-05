@@ -2,10 +2,10 @@ myapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', funct
 
     $locationProvider.html5Mode(true).hashPrefix('');
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/talent_assessmet_test');
 
     $stateProvider.state("quiz", {
-        url: '/talent_assessmet_test',
+        url: '/talent_assessmet_test/',
         templateUrl: 'quiz.html',
         controller: 'myCon',
     });

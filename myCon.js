@@ -2,7 +2,7 @@ myapp.controller("myCon", quizController);
 function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $state,$stateParams,$location,$anchorScroll) {
     console.log('calling');
     var quizList = this;
-    quizList.baseUrl='/talent_assessmet_test';
+    quizList.baseUrl='/talent_assessmet_test'; 
     quizList.title = "QuizApp";
     quizList.showQzTimeReqEror = false;
     quizList.finalsubmit=false;
