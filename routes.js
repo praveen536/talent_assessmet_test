@@ -2,7 +2,7 @@ myapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', funct
 
     $locationProvider.html5Mode(true).hashPrefix('');
 
-    $urlRouterProvider.otherwise('/talent_assessmet_test');
+    $urlRouterProvider.otherwise('/test');
 
     $stateProvider.state("quiz", {
         url: '/',
