@@ -6,7 +6,7 @@ myapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', funct
 
     $stateProvider.state("quiz", {
         url: '/talent_assessmet_test',
-        templateUrl: 'dtalent_assessmet_test/quiz.html',
+        templateUrl: 'talent_assessmet_test/quiz.html',
         controller: 'myCon',
     });
 
