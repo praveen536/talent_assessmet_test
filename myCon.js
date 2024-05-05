@@ -74,7 +74,7 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
         }
     }
     // quiz timer start on controller load
-    var myTimeout = $timeout(quizList.qzTimer, 1000);
+    // var myTimeout = $timeout(quizList.qzTimer, 1000);
 
     // for reset countdown
     quizList.resetCountdown = function () {
