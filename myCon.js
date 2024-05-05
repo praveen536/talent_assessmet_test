@@ -16,7 +16,7 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
         quizList.isReview=quizList.isReview ? false:true;
     }
     // getting quiz list from json
-    $http.get(quizList.baseUrl+'/question.json').then(function (res) {
+    $http.get(quizList.baseUrl+'question.json').then(function (res) {
         console.log(res);
         quizList.quiz = res.data;
         // for (let i = 0; i < res.data.questions.length; i++) {
@@ -74,7 +74,7 @@ function quizController($http, $scope, $q, $timeout, WizardHandler,$filter, $sta
         }
     }
     // quiz timer start on controller load
-    // var myTimeout = $timeout(quizList.qzTimer, 1000);
+    var myTimeout = $timeout(quizList.qzTimer, 1000);
 
     // for reset countdown
     quizList.resetCountdown = function () {
